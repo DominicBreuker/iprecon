@@ -1,0 +1,47 @@
+[build-system]
+requires      = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iprecon"
+version = "1.0.0"
+description = "CLI tool that retrieves WHOIS data for IP addresses"
+readme = "README.md"
+authors = [{ name = "Dominic Breuker", email = "admin@dominicbreuker.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["ip", "whois", "recon", "security", "bug-bounty"]
+requires-python = ">=3.10"
+dynamic = ["dependencies"]
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.optional-dependencies]
+dev = ["black", "bumpver", "pytest", "build", "twine"]
+
+[project.urls]
+Homepage = "https://github.com/dominicbreuker/iprecon"
+
+[project.scripts]
+iprecon = "iprecon.__main__:main"
+
+[tool.bumpver]
+current_version = "1.0.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = [
+    'current_version = "{version}"',
+    'version = "{version}"',
+]
+"src/iprecon/__init__.py" = [
+    '__version__ = "{version}"',
+]
